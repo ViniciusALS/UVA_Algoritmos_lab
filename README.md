@@ -24,10 +24,10 @@ Se essa for a sua primeira vez no repositório, siga os passos abaixo:
 
 ## 🗓️ Datas de Entrega
 
-| Data  | Projeto A4              | Projeto de Extensão     |
-| ----- | ----------------------- | ----------------------- |
-| 16/05 | Formulário do grupo [x] | Formulário do grupo [x] |
-| 13/06 | Entrega final []        | Entrega final []        |
+| Data  | Projeto A4                | Projeto de Extensão       |
+| ----- | ------------------------- | ------------------------- |
+| 16/05 | - [x] Formulário do grupo | - [x] Formulário do grupo |
+| 13/06 | - [ ] Entrega final       | - [ ] Entrega final       |
 
 ## 🔄 Fluxo de Trabalho com Git
 
