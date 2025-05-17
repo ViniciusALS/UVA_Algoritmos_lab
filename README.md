@@ -22,6 +22,13 @@ Se essa for a sua primeira vez no repositório, siga os passos abaixo:
 
 3. Abra o arquivo pelo [VS Code](https://code.visualstudio.com/).
 
+## 🗓️ Datas de Entrega
+
+| Data  | Projeto A4              | Projeto de Extensão     |
+| ----- | ----------------------- | ----------------------- |
+| 16/05 | Formulário do grupo [x] | Formulário do grupo [x] |
+| 13/06 | Entrega final []        | Entrega final []        |
+
 ## 🔄 Fluxo de Trabalho com Git
 
 ### Primeira Vez Usando Git
