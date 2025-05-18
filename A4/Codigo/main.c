@@ -10,6 +10,8 @@
 #endif
 
 FILE* abreOuCriaArquivo(char* nomeArquivo);
+void sistemaLocadora(FILE* bancoDeDados);
+void exibeMenuPrincipal();
 
 
 int main() {
@@ -23,10 +25,34 @@ int main() {
         return -1;
     }
 
-    
+    sistemaLocadora(bancoDeDados);
+
     return 0;
 }
 
 FILE* abreOuCriaArquivo(char* nomeArquivo) {
     return fopen(nomeArquivo, "a+"); 
+}
+
+void sistemaLocadora(FILE* bancoDeDados) {
+
+    clrscr();
+    
+    exibeMenuPrincipal();
+    
+}
+
+void exibeMenuPrincipal() {
+    printf("Locadora Digital Veiga de Almeida\n\n");
+
+    printf("Escolha uma opção:\n\n");
+    
+    printf("1 - Gerenciar usuários\n");
+    printf("2 - Gerenciar filmes\n");
+    printf("3 - Gerenciar séries\n");
+    printf("4 - Gerenciar diretores\n");
+    printf("5 - Gerenciar categorias\n\n");
+    printf("0 - Encerrar programa\n\n\n");
+
+    printf("Opção desejada: ");
 }
