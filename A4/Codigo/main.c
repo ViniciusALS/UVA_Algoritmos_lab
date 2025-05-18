@@ -9,20 +9,24 @@
 #define clrscr() printf("\e[1;1H\e[2J")
 #endif
 
-
+FILE* abreOuCriaArquivo(char* nomeArquivo);
 
 
 int main() {
 
     setlocale(LC_ALL, "Portuguese");
 
-    FILE* arquivo = abreOuCriaArquivo();
+    FILE* bancoDeDados = abreOuCriaArquivo("locadora_digital.txt");
 
-    if (arquivo == NULL) {
+    if (bancoDeDados == NULL) {
         printf("Falha ao abrir o arquivo.");
         return -1;
     }
 
     
     return 0;
+}
+
+FILE* abreOuCriaArquivo(char* nomeArquivo) {
+    return fopen(nomeArquivo, "a+"); 
 }
