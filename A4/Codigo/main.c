@@ -33,15 +33,12 @@ typedef struct {
 } Data;
 
 typedef struct {
-    char nomeCliente[TAMANHO_MAX_STRING];
-    int diaDaVenda;
-    int mesDaVenda;
-    int anoDaVenda;
     char codigoItem[TAMANHO_MAX_STRING];
     char nomeItem[TAMANHO_MAX_STRING];
     char marcaItem[TAMANHO_MAX_STRING];
     int quantidadeItem;
     float precoUnitarioItem;
+    float precoTotal;
 } Venda;
 
 // void moveParaInicioDoArquivo(FILE* arquivo);
