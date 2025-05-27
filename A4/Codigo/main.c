@@ -60,6 +60,9 @@ void exibeMenuDiaDeVenda();
 void processaMenuDiaDeVenda(OpcaoMenuDiaDeVenda opcao);
 void exibeMenuVendaCliente();
 void processaMenuVendaCliente(OpcaoMenuVendaCliente opcao);
+Venda recebeInformacoesDaVenda();
+float calculaPrecoTotal(Venda venda);
+void salvaVendaAoArquivo(Venda venda);
 void salvaClienteNovoAoArquivo();
 void salvaDataAoArquivo(Data data);
 void escreveEmArquivo(char* texto);
@@ -190,8 +193,53 @@ void exibeMenuVendaCliente() {
     printf("Opção desejada: ");
 }
 
+
 void processaMenuVendaCliente(OpcaoMenuVendaCliente opcao) {
+    if (opcao == ADICIONAR_ITEM) {
+        Venda venda = recebeInformacoesDaVenda();
+    }
 }
+
+
+Venda recebeInformacoesDaVenda() {
+    Venda venda;
+
+    limpaTela();
+    
+    printf("Digite o código do item: ");
+    scanf(" %[^\n]", venda.codigoItem);
+
+    printf("Digite o nome do item:");
+    scanf(" %[^\n]", venda.nomeItem);
+
+    printf("Digite a marca do item: ");
+    scanf(" %[^\n]", venda.marcaItem);
+
+    printf("Digite a quantidade de items: ");
+    scanf(" %d", venda.quantidadeItem);
+
+    printf("Digite o preço unitário do item: ");
+    scanf(" %.2f", venda.precoUnitarioItem);
+
+    venda.precoTotal = calculaPrecoTotal(venda);
+
+    return venda;
+}
+
+float calculaPrecoTotal(Venda venda) {
+    float precoTotal = venda.precoUnitarioItem * venda.quantidadeItem;
+
+    // TODO: Tirar duvida com professor se o desconto é aplicado na venda de produtos do mesmo tipo 
+    if (venda.quantidadeItem >= 3)
+        precoTotal *= 0.9;
+
+    return precoTotal;
+}
+
+void salvaVendaAoArquivo(Venda venda) {
+    char texto[250];
+    sprintf(texto, "%s, %s, %s, %d, %.2f, %.2f \n");
+    escreveEmArquivo(texto);
 }
 
 
