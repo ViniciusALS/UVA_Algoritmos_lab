@@ -169,7 +169,7 @@ void limpaTela() {
 
 
 int recebeOpcao() {
-    OpcaoMenu opcao;
+    int opcao;
     scanf(" %d", &opcao);
     return opcao;
 }
