@@ -11,251 +11,206 @@
 #include <stdlib.h>
 #include <locale.h>
 
-// Define função para limpar tela em maquinas Windows ou Linux / Mac 
-#ifdef _WIN32
-#include <conio.h>
-#else
-#define clrscr() printf("\e[1;1H\e[2J")
-#endif
 
-FILE* abreOuCriaArquivo(char* nomeArquivo);
-void sistemaLocadora(FILE* bancoDeDados);
-void exibeMenuPrincipal();
-void gerenciaUsuarios(FILE* bancoDeDados);
-void gerenciaFilmes(FILE* bancoDeDados);
-void gerenciaSeries(FILE* bancoDeDados);
-void gerenciaDiretores(FILE* bancoDeDados);
-void gerenciaCategorias(FILE* bancoDeDados);
-void exibeMenuUsuarios();
-void exibeMenuFilmes();
-void exibeMenuSeries();
-void exibeMenuDiretores();
-void exibeMenuCategorias();
+#define TAMANHO_MAX_STRING 50
+#define NOME_ARQUIVO "loja_roupa.txt"
+
+typedef enum {
+    SAIR,
+    INICIAR_DIA,
+    APRESENTAR_RELATORIO
+} OpcaoMenu;
+
+typedef enum {
+    TERMINAR,
+    REGISTRAR_CLIENTE
+} OpcaoMenuDiaDeVenda;
+
+typedef struct {
+    int dia;
+    int mes;
+    int ano;
+} Data;
+
+typedef struct {
+    char nomeCliente[TAMANHO_MAX_STRING];
+    int diaDaVenda;
+    int mesDaVenda;
+    int anoDaVenda;
+    char codigoItem[TAMANHO_MAX_STRING];
+    char nomeItem[TAMANHO_MAX_STRING];
+    char marcaItem[TAMANHO_MAX_STRING];
+    int quantidadeItem;
+    float precoUnitarioItem;
+} Venda;
+
+// void moveParaInicioDoArquivo(FILE* arquivo);
+// void moveParaFimDoArquivo(FILE* arquivo);
+void sistemaLoja();
+void limpaTela();
+void exibeMenu();
+int recebeOpcao();
+void processaMenu(OpcaoMenu opcao);
+void iniciaDiaDeVenda();
+void exibePedidoPorData();
+Data recebeDataAtual();
+void exibeMenuDiaDeVenda();
+void processaMenuDiaDeVenda(OpcaoMenuDiaDeVenda opcao);
+void salvaClienteNovoAoArquivo();
+void salvaDataAoArquivo(Data data);
+void escreveEmArquivo(char* texto);
+FILE* abreArquivo();
 
 
 int main() {
 
     setlocale(LC_ALL, "Portuguese");
 
-    FILE* bancoDeDados = abreOuCriaArquivo("locadora_digital.txt");
-
-    if (bancoDeDados == NULL) {
-        printf("Falha ao abrir o arquivo.");
-        return -1;
-    }
-
-    sistemaLocadora(bancoDeDados);
-
+    sistemaLoja();
+    
     return 0;
 }
 
-FILE* abreOuCriaArquivo(char* nomeArquivo) {
-    return fopen(nomeArquivo, "a+"); 
+
+// void moveParaInicioDoArquivo(FILE* arquivo) {
+//     rewind(arquivo);
+// }
+
+// void moveParaFimDoArquivo(FILE* arquivo) {
+//     fseek(arquivo, 0, SEEK_END);
+// }
+
+void sistemaLoja() {
+
+    OpcaoMenu opcao;
+
+    do {    
+        exibeMenu();
+        opcao = recebeOpcao();
+        processaMenu(opcao);
+    } while(opcao != SAIR);
 }
 
-void sistemaLocadora(FILE* bancoDeDados) {
 
-    int opcao;
+void exibeMenu() {
+    limpaTela();
 
-    do {
-        clrscr();
-        exibeMenuPrincipal();
-        scanf(" %d", &opcao);
+    printf("Loja de roupas Veiga de Almeida\n\n\n");
 
-        switch (opcao) {
-            case 1:
-                gerenciaUsuarios(bancoDeDados);
-                break;
-            case 2:
-                gerenciaFilmes(bancoDeDados);
-                break;
-            case 3:
-                gerenciaSeries(bancoDeDados);
-                break;
-            case 4:
-                gerenciaDiretores(bancoDeDados);
-                break;
-            case 5:
-                gerenciaCategorias(bancoDeDados);
-                break;
-            default:
-                opcao = 0;
-        }
+    printf("Escolha o que você deseja fazer: \n\n");
 
-    } while(opcao != 0);
-}
-
-void exibeMenuPrincipal() {
-    printf("Locadora Digital Veiga de Almeida\n\n");
-
-    printf("Escolha uma opção:\n\n");
-    
-    printf("1 - Gerenciar usuários\n");
-    printf("2 - Gerenciar filmes\n");
-    printf("3 - Gerenciar séries\n");
-    printf("4 - Gerenciar diretores\n");
-    printf("5 - Gerenciar categorias\n\n");
-    printf("0 - Encerrar programa\n\n\n");
+    printf("1 - Iniciar dia de venda \n");
+    printf("2 - Apresentar relatório \n");
+    printf("0 - Sair do programa \n\n");
 
     printf("Opção desejada: ");
 }
 
-void gerenciaUsuarios(FILE* bancoDeDados) {
 
-    int opcao;
+void processaMenu(OpcaoMenu opcao) {
+    if (opcao == INICIAR_DIA)
+        iniciaDiaDeVenda();
 
-    do {
-        clrscr();
-        exibeMenuUsuarios();
-        scanf(" %d", &opcao);
-
-        switch(opcao) {
-            default:
-                break;
-        }
-
-    } while (opcao != 0);
+    if (opcao == APRESENTAR_RELATORIO) 
+        return; // Apresenta relatorio
 }
 
-void gerenciaFilmes(FILE* bancoDeDados) {
 
-    int opcao;
+void iniciaDiaDeVenda() {
 
-    do {
-        clrscr();
-        exibeMenuFilmes();
-        scanf(" %d", &opcao);
+    exibePedidoPorData();    
+    Data dataAtual = recebeDataAtual();
+    salvaDataAoArquivo(dataAtual);
 
-        switch(opcao) {
-            default:
-                break;
-        }
-        
-    } while (opcao != 0);
-}
-
-void gerenciaSeries(FILE* bancoDeDados) {
-
-    int opcao;
+    OpcaoMenuDiaDeVenda opcao;
 
     do {
-        clrscr();
-        exibeMenuSeries();
-        scanf(" %d", &opcao);
-
-        switch(opcao) {
-            default:
-                break;
-        }
-        
-    } while (opcao != 0);
+        exibeMenuDiaDeVenda();
+        opcao = recebeOpcao();
+        processaMenuDiaDeVenda(opcao);
+    } while(opcao != TERMINAR);
 }
 
-void gerenciaDiretores(FILE* bancoDeDados) {
 
-    int opcao;
-
-    do {
-        clrscr();
-        exibeMenuDiretores();
-        scanf(" %d", &opcao);
-
-        switch(opcao) {
-            default:
-                break;
-        }
-        
-    } while (opcao != 0);
+void exibePedidoPorData() {
+    limpaTela();
+    printf("Entre com a data de hoje (dd/mm/aaaa): ");
 }
 
-void gerenciaCategorias(FILE* bancoDeDados) {
 
-    int opcao;
-
-    do {
-        clrscr();
-        exibeMenuCategorias();
-        scanf(" %d", &opcao);
-
-        switch(opcao) {
-            default:
-                break;
-        }
-        
-    } while (opcao != 0);
+Data recebeDataAtual() {
+    Data dataAtual;
+    scanf(" %d/%d/%d", &dataAtual.dia, &dataAtual.mes, &dataAtual.ano);
+    return dataAtual;
 }
 
-void exibeMenuUsuarios() {
-    printf("Gerenciador de Usuários\n\n\n");
 
-    printf("Escolha uma opção:\n\n");
-    
-    printf("1 - Adicionar usuário\n");
-    printf("2 - Buscar usuário\n");
-    printf("3 - Listar usuários\n");
-    printf("4 - Editar usuario\n");
-    printf("5 - Deletar usuario\n\n");
-    printf("0 - Voltar ao menu principal\n\n\n");
+void exibeMenuDiaDeVenda() {
+    limpaTela();
+    printf("Escolha uma opcão: \n\n");
+
+    printf("1 - Registrar novo cliente. \n");
+    printf("0 - Terminar dia de venda. \n\n");
 
     printf("Opção desejada: ");
 }
 
-void exibeMenuFilmes() {
-    printf("Gerenciador de Filmes\n\n\n");
 
-    printf("Escolha uma opção:\n\n");
-    
-    printf("1 - Adicionar filme\n");
-    printf("2 - Buscar filme\n");
-    printf("3 - Listar filmes\n");
-    printf("4 - Editar filme\n");
-    printf("5 - Deletar filme\n\n");
-    printf("0 - Voltar ao menu principal\n\n\n");
-
-    printf("Opção desejada: ");
+void processaMenuDiaDeVenda(OpcaoMenuDiaDeVenda opcao) {
+    if (opcao == REGISTRAR_CLIENTE) {
+        salvaClienteNovoAoArquivo();
+    }
 }
 
-void exibeMenuSeries() {
-    printf("Gerenciador de Séries\n\n\n");
 
-    printf("Escolha uma opção:\n\n");
-    
-    printf("1 - Adicionar série\n");
-    printf("2 - Buscar série\n");
-    printf("3 - Listar séries\n");
-    printf("4 - Editar série\n");
-    printf("5 - Deletar série\n\n");
-    printf("0 - Voltar ao menu principal\n\n\n");
-
-    printf("Opção desejada: ");
+void limpaTela() {
+    printf("\e[H\e[2J\e[3J");
 }
 
-void exibeMenuDiretores() {
-    printf("Gerenciador de Diredores\n\n\n");
 
-    printf("Escolha uma opção:\n\n");
-    
-    printf("1 - Adicionar diretor\n");
-    printf("2 - Buscar diretor\n");
-    printf("3 - Listar diretores\n");
-    printf("4 - Editar diretor\n");
-    printf("5 - Deletar diretor\n\n");
-    printf("0 - Voltar ao menu principal\n\n\n");
-
-    printf("Opção desejada: ");
+int recebeOpcao() {
+    OpcaoMenu opcao;
+    scanf(" %d", &opcao);
+    return opcao;
 }
 
-void exibeMenuCategorias() {
-    printf("Gerenciador de Categorias\n\n\n");
 
-    printf("Escolha uma opção:\n\n");
-    
-    printf("1 - Adicionar categoria\n");
-    printf("2 - Buscar categoria\n");
-    printf("3 - Listar categorias\n");
-    printf("4 - Editar categoria\n");
-    printf("5 - Deletar categoria\n\n");
-    printf("0 - Voltar ao menu principal\n\n\n");
+void salvaClienteNovoAoArquivo() {
+    char texto[] = "CLIENTE NOVO\n";
+    escreveEmArquivo(texto);
+}
 
-    printf("Opção desejada: ");
+
+void salvaDataAoArquivo(Data data) {
+    char texto[20];
+    sprintf(texto, "DATA: %d/%d/%d", data.dia, data.mes, data.ano);
+
+    escreveEmArquivo(texto);
+}
+
+
+void escreveEmArquivo(char* texto) {
+
+    FILE* arquivo = abreArquivo();
+
+    int resultadoEscrita = fputs(texto, arquivo);
+
+    if (resultadoEscrita == EOF) {
+        limpaTela();
+        printf("Erro ao tentar escrever. \n\n");
+    }
+
+    fclose(arquivo);
+}
+
+
+FILE* abreArquivo() {
+    FILE* arquivo = fopen(NOME_ARQUIVO, "a+");
+
+    if (arquivo == NULL) {
+        limpaTela();
+        printf("Erro ao tentar abrir o arquivo \n\n");
+    }
+
+    return arquivo;
 }
