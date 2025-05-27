@@ -171,7 +171,7 @@ void processaMenuDiaDeVenda(OpcaoMenuDiaDeVenda opcao) {
 
 
 void registraVendaCliente() {
-        salvaClienteNovoAoArquivo();
+    salvaClienteNovoAoArquivo();    
 
     OpcaoMenuVendaCliente opcao;
 
@@ -263,8 +263,7 @@ void salvaClienteNovoAoArquivo() {
 
 void salvaDataAoArquivo(Data data) {
     char texto[20];
-    sprintf(texto, "DATA: %d/%d/%d", data.dia, data.mes, data.ano);
-
+    sprintf(texto, "DATA: %d/%d/%d \n\n", data.dia, data.mes, data.ano);
     escreveEmArquivo(texto);
 }
 
