@@ -26,6 +26,11 @@ typedef enum {
     REGISTRAR_CLIENTE
 } OpcaoMenuDiaDeVenda;
 
+typedef enum {
+    ENCERRAR_VENDAS_DE_CLIENTE,
+    ADICIONAR_ITEM
+} OpcaoMenuVendaCliente;
+
 typedef struct {
     int dia;
     int mes;
@@ -53,10 +58,13 @@ void exibePedidoPorData();
 Data recebeDataAtual();
 void exibeMenuDiaDeVenda();
 void processaMenuDiaDeVenda(OpcaoMenuDiaDeVenda opcao);
+void exibeMenuVendaCliente();
+void processaMenuVendaCliente(OpcaoMenuVendaCliente opcao);
 void salvaClienteNovoAoArquivo();
 void salvaDataAoArquivo(Data data);
 void escreveEmArquivo(char* texto);
 FILE* abreArquivo();
+void registraVendaCliente();
 
 
 int main() {
@@ -154,9 +162,36 @@ void exibeMenuDiaDeVenda() {
 
 
 void processaMenuDiaDeVenda(OpcaoMenuDiaDeVenda opcao) {
-    if (opcao == REGISTRAR_CLIENTE) {
+    if (opcao == REGISTRAR_CLIENTE)
+        registraVendaCliente();
+}
+
+
+void registraVendaCliente() {
         salvaClienteNovoAoArquivo();
-    }
+
+    OpcaoMenuVendaCliente opcao;
+
+    do {
+        exibeMenuVendaCliente();
+        opcao = recebeOpcao();
+        processaMenuVendaCliente(opcao);
+    } while(opcao != ENCERRAR_VENDAS_DE_CLIENTE);
+}
+
+
+void exibeMenuVendaCliente() {
+    limpaTela();
+    printf("Escolha uma opcão: \n\n");
+
+    printf("1 - Adicionar nova venda de item. \n");
+    printf("0 - Encerrar vendas do cliente. \n\n");
+
+    printf("Opção desejada: ");
+}
+
+void processaMenuVendaCliente(OpcaoMenuVendaCliente opcao) {
+}
 }
 
 
