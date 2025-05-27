@@ -1,11 +1,14 @@
-/*
-    Projeto de Extensão da disciplina de algoritmos do professor Lazaro de Oliveira
+/**************************************************
+ 
+    Projeto da A4 da disciplina de algoritmos 
+    do professor Lazaro de Oliveira
 
     Grupo:  Igor Sousa Alves    - 1240207519
             Kamilla Lucas Tré   - 1230106915
             Thalles Henriques   - 1240114928
             Vinícius de Azevedo - 1240201902
-*/
+
+***************************************************/
 
 
 ///////////////////////////////////////////////////
@@ -110,9 +113,11 @@ int main() {
 //     rewind(arquivo);
 // }
 
+
 // void moveParaFimDoArquivo(FILE* arquivo) {
 //     fseek(arquivo, 0, SEEK_END);
 // }
+
 
 void sistemaLoja() {
 
