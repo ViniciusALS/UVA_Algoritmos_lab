@@ -8,7 +8,6 @@
 */
 
 
-
 ///////////////////////////////////////////////////
 ////////////// IMPORTA BIBLIOTECAS ////////////////
 ///////////////////////////////////////////////////
@@ -253,6 +252,7 @@ Venda recebeInformacoesDaVenda() {
     return venda;
 }
 
+
 float calculaPrecoTotal(Venda venda) {
     float precoTotal = venda.precoUnitarioItem * venda.quantidadeItem;
 
@@ -262,6 +262,7 @@ float calculaPrecoTotal(Venda venda) {
 
     return precoTotal;
 }
+
 
 void salvaVendaAoArquivo(Venda venda) {
     char texto[250];
