@@ -179,6 +179,18 @@ void iniciaDiaDeVenda() {
 }
 
 
+void apresentaRelatorios() {
+
+    int opcao;
+
+    do {
+        exibeMenuDeRelatorios();
+        opcao = recebeOpcao();
+        processaMenuRelatorios(opcao);
+    } while(opcao != VOLTAR_MENU_PRINCIPAL);
+}
+
+
 void exibePedidoPorData() {
     limpaTela();
     printf("Entre com a data de hoje (dd/mm/aaaa): ");
@@ -189,6 +201,13 @@ Data recebeDataAtual() {
     Data dataAtual;
     scanf(" %d/%d/%d", &dataAtual.dia, &dataAtual.mes, &dataAtual.ano);
     return dataAtual;
+}
+
+
+void salvaDataAoArquivo(Data data) {
+    char texto[30];
+    sprintf(texto, "\n\nDATA: %02d/%02d/%04d \n", data.dia, data.mes, data.ano);
+    escreveEmArquivo(texto);
 }
 
 
@@ -219,6 +238,12 @@ void registraNovoCliente() {
         opcao = recebeOpcao();
         processaMenuVendaCliente(opcao);
     } while(opcao != ENCERRAR_VENDAS_DE_CLIENTE);
+}
+
+
+void salvaClienteNovoAoArquivo() {
+    char texto[] = "\nCLIENTE NOVO\n";
+    escreveEmArquivo(texto);
 }
 
 
@@ -267,17 +292,6 @@ Venda recebeInformacoesDaVenda() {
 }
 
 
-float calculaPrecoTotal(Venda venda) {
-    float precoTotal = venda.precoUnitarioItem * venda.quantidadeItem;
-
-    // TODO: Tirar duvida com professor se o desconto é aplicado na venda de produtos do mesmo tipo 
-    if (venda.quantidadeItem >= 3)
-        precoTotal *= 0.9;
-
-    return precoTotal;
-}
-
-
 void salvaVendaAoArquivo(Venda venda) {
     char texto[250];
     
@@ -294,28 +308,26 @@ void salvaVendaAoArquivo(Venda venda) {
 }
 
 
-void limpaTela() {
-    printf("\e[H\e[2J\e[3J");
+float calculaPrecoTotal(Venda venda) {
+    float precoTotal = venda.precoUnitarioItem * venda.quantidadeItem;
+
+    // TODO: Tirar duvida com professor se o desconto é aplicado na venda de produtos do mesmo tipo 
+    if (venda.quantidadeItem >= 3)
+        precoTotal *= 0.9;
+
+    return precoTotal;
 }
 
 
-int recebeOpcao() {
-    int opcao;
-    scanf(" %d", &opcao);
-    return opcao;
-}
+void exibeMenuDeRelatorios() {
+    limpaTela();
+    printf("Escolha o relatório que deseja ver: \n\n");
 
+    printf("1 - Listar todas as vendas. \n");
+    printf("2 - Lister vendas por dia. \n");
+    printf("0 - Voltar ao menu principal. \n\n");
 
-void salvaClienteNovoAoArquivo() {
-    char texto[] = "\nCLIENTE NOVO\n";
-    escreveEmArquivo(texto);
-}
-
-
-void salvaDataAoArquivo(Data data) {
-    char texto[30];
-    sprintf(texto, "\n\nDATA: %02d/%02d/%04d \n", data.dia, data.mes, data.ano);
-    escreveEmArquivo(texto);
+    printf("Opção desejada: ");
 }
 
 
@@ -346,25 +358,13 @@ FILE* abreArquivo() {
 }
 
 
-void apresentaRelatorios() {
-
-    int opcao;
-
-    do {
-        exibeMenuDeRelatorios();
-        opcao = recebeOpcao();
-        processaMenuRelatorios(opcao);
-    } while(opcao != VOLTAR_MENU_PRINCIPAL);
+void limpaTela() {
+    printf("\e[H\e[2J\e[3J");
 }
 
 
-void exibeMenuDeRelatorios() {
-    limpaTela();
-    printf("Escolha o relatório que deseja ver: \n\n");
-
-    printf("1 - Listar todas as vendas. \n");
-    printf("2 - Lister vendas por dia. \n");
-    printf("0 - Voltar ao menu principal. \n\n");
-
-    printf("Opção desejada: ");
+int recebeOpcao() {
+    int opcao;
+    scanf(" %d", &opcao);
+    return opcao;
 }
