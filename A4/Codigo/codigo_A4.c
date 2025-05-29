@@ -240,7 +240,7 @@ Venda recebeInformacoesDaVenda() {
     printf("Digite o código do item: ");
     scanf(" %[^\n]", venda.codigoItem);
 
-    printf("Digite o nome do item:");
+    printf("Digite o nome do item: ");
     scanf(" %[^\n]", venda.nomeItem);
 
     printf("Digite a marca do item: ");
