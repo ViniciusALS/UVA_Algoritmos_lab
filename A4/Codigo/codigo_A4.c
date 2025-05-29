@@ -228,6 +228,7 @@ void exibeMenuVendaCliente() {
 void processaMenuVendaCliente(OpcaoMenuVendaCliente opcao) {
     if (opcao == ADICIONAR_ITEM) {
         Venda venda = recebeInformacoesDaVenda();
+        salvaVendaAoArquivo(venda);
     }
 }
 
