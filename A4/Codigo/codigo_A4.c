@@ -247,10 +247,10 @@ Venda recebeInformacoesDaVenda() {
     scanf(" %[^\n]", venda.marcaItem);
 
     printf("Digite a quantidade de items: ");
-    scanf(" %d", venda.quantidadeItem);
+    scanf(" %d", &venda.quantidadeItem);
 
     printf("Digite o preço unitário do item: ");
-    scanf(" %.2f", venda.precoUnitarioItem);
+    scanf(" %f", &venda.precoUnitarioItem);
 
     venda.precoTotal = calculaPrecoTotal(venda);
 
