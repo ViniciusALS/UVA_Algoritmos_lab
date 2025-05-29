@@ -44,6 +44,12 @@ typedef enum {
     ADICIONAR_ITEM
 } OpcaoMenuVendaCliente;
 
+typedef enum {
+    VOLTAR_MENU_PRINCIPAL,
+    LISTAR_TODAS_VENDAS,
+    LISTAR_VENDAS_POR_DATA
+} OpcaoMenuRelatorios;
+
 typedef struct {
     int dia;
     int mes;
@@ -73,6 +79,7 @@ void exibeMenu();
 int recebeOpcao();
 void processaMenu(OpcaoMenu opcao);
 void iniciaDiaDeVenda();
+void apresentaRelatorios();
 void exibePedidoPorData();
 Data recebeDataAtual();
 void exibeMenuDiaDeVenda();
@@ -151,7 +158,7 @@ void processaMenu(OpcaoMenu opcao) {
         iniciaDiaDeVenda();
 
     if (opcao == APRESENTAR_RELATORIO) 
-        return; // Apresenta relatorio
+        exibeMenuDeRelatorios();
 }
 
 
@@ -335,4 +342,28 @@ FILE* abreArquivo() {
     }
 
     return arquivo;
+}
+
+
+void apresentaRelatorios() {
+
+    int op;
+
+    do {
+        exibeMenuDeRelatorios();
+        op = recebeOpcao();
+    }
+
+}
+
+
+void exibeMenuDeRelatorios() {
+    limpaTela();
+    printf("Escolha o relatório que deseja ver: \n\n");
+
+    printf("1 - Listar todas as vendas. \n");
+    printf("2 - Lister vendas por dia. \n");
+    printf("0 - Voltar ao menu principal. \n\n");
+
+    printf("Opção desejada: ");
 }
