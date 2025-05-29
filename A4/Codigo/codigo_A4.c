@@ -74,15 +74,19 @@ typedef struct {
 // void moveParaInicioDoArquivo(FILE* arquivo);
 // void moveParaFimDoArquivo(FILE* arquivo);
 void sistemaLoja();
-void limpaTela();
 void exibeMenu();
-int recebeOpcao();
 void processaMenu(OpcaoMenu opcao);
 void iniciaDiaDeVenda();
 void apresentaRelatorios();
+
+void exibeMenuDiaDeVenda();
+void exibeMenuDeRelatorios();
+
+
+void limpaTela();
+int recebeOpcao();
 void exibePedidoPorData();
 Data recebeDataAtual();
-void exibeMenuDiaDeVenda();
 void processaMenuDiaDeVenda(OpcaoMenuDiaDeVenda opcao);
 void exibeMenuVendaCliente();
 void processaMenuVendaCliente(OpcaoMenuVendaCliente opcao);
