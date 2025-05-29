@@ -134,7 +134,7 @@ void sistemaLoja() {
 void exibeMenu() {
     limpaTela();
 
-    printf("Loja de roupas Veiga de Almeida\n\n\n");
+    printf("Loja de Roupas Veiga de Almeida\n\n\n");
 
     printf("Escolha o que você deseja fazer: \n\n");
 
