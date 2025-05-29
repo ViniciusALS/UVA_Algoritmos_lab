@@ -86,7 +86,7 @@ void salvaClienteNovoAoArquivo();
 void salvaDataAoArquivo(Data data);
 void escreveEmArquivo(char* texto);
 FILE* abreArquivo();
-void registraVendaCliente();
+void registraNovoCliente();
 
 
 
@@ -197,11 +197,11 @@ void exibeMenuDiaDeVenda() {
 
 void processaMenuDiaDeVenda(OpcaoMenuDiaDeVenda opcao) {
     if (opcao == REGISTRAR_CLIENTE)
-        registraVendaCliente();
+        registraNovoCliente();
 }
 
 
-void registraVendaCliente() {
+void registraNovoCliente() {
     salvaClienteNovoAoArquivo();    
 
     OpcaoMenuVendaCliente opcao;
