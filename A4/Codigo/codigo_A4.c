@@ -78,26 +78,23 @@ void exibeMenu();
 void processaMenu(OpcaoMenu opcao);
 void iniciaDiaDeVenda();
 void apresentaRelatorios();
-
-void exibeMenuDiaDeVenda();
-void exibeMenuDeRelatorios();
-
-
-void limpaTela();
-int recebeOpcao();
 void exibePedidoPorData();
 Data recebeDataAtual();
+void salvaDataAoArquivo(Data data);
+void exibeMenuDiaDeVenda();
 void processaMenuDiaDeVenda(OpcaoMenuDiaDeVenda opcao);
+void registraNovoCliente();
+void salvaClienteNovoAoArquivo();
 void exibeMenuVendaCliente();
 void processaMenuVendaCliente(OpcaoMenuVendaCliente opcao);
 Venda recebeInformacoesDaVenda();
-float calculaPrecoTotal(Venda venda);
 void salvaVendaAoArquivo(Venda venda);
-void salvaClienteNovoAoArquivo();
-void salvaDataAoArquivo(Data data);
+float calculaPrecoTotal(Venda venda);
+void exibeMenuDeRelatorios();
 void escreveEmArquivo(char* texto);
 FILE* abreArquivo();
-void registraNovoCliente();
+void limpaTela();
+int recebeOpcao();
 
 
 
