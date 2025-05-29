@@ -159,7 +159,7 @@ void processaMenu(OpcaoMenu opcao) {
         iniciaDiaDeVenda();
 
     if (opcao == APRESENTAR_RELATORIO) 
-        exibeMenuDeRelatorios();
+        apresentaRelatorios();
 }
 
 
@@ -348,13 +348,13 @@ FILE* abreArquivo() {
 
 void apresentaRelatorios() {
 
-    int op;
+    int opcao;
 
     do {
         exibeMenuDeRelatorios();
-        op = recebeOpcao();
-    }
-
+        opcao = recebeOpcao();
+        processaMenuRelatorios(opcao);
+    } while(opcao != VOLTAR_MENU_PRINCIPAL);
 }
 
 
