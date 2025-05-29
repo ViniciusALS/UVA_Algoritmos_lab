@@ -271,7 +271,16 @@ float calculaPrecoTotal(Venda venda) {
 
 void salvaVendaAoArquivo(Venda venda) {
     char texto[250];
-    sprintf(texto, "%s, %s, %s, %d, %.2f, %.2f \n");
+    
+    sprintf(texto, 
+        "%s, %s, %s, %d, %.2f, %.2f \n", 
+        venda.codigoItem,
+        venda.nomeItem, 
+        venda.marcaItem, 
+        venda.quantidadeItem, 
+        venda.precoUnitarioItem, 
+        venda.precoTotal);
+
     escreveEmArquivo(texto);
 }
 
