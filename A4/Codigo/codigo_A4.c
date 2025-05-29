@@ -298,14 +298,14 @@ int recebeOpcao() {
 
 
 void salvaClienteNovoAoArquivo() {
-    char texto[] = "CLIENTE NOVO\n";
+    char texto[] = "\nCLIENTE NOVO\n";
     escreveEmArquivo(texto);
 }
 
 
 void salvaDataAoArquivo(Data data) {
-    char texto[20];
-    sprintf(texto, "DATA: %d/%d/%d \n\n", data.dia, data.mes, data.ano);
+    char texto[30];
+    sprintf(texto, "\n\nDATA: %02d/%02d/%04d \n", data.dia, data.mes, data.ano);
     escreveEmArquivo(texto);
 }
 
