@@ -82,6 +82,7 @@ Data recebeDataAtual();
 void salvaDataAoArquivo(Data data);
 void exibeMenuDiaDeVenda();
 void processaMenuDiaDeVenda(OpcaoMenuDiaDeVenda opcao);
+void adicionaItemNovo();
 void registraNovoCliente();
 void salvaClienteNovoAoArquivo();
 void exibeMenuVendaCliente();
@@ -254,10 +255,17 @@ void exibeMenuVendaCliente() {
 
 
 void processaMenuVendaCliente(OpcaoMenuVendaCliente opcao) {
-    if (opcao == ADICIONAR_ITEM) {
-        Venda venda = recebeInformacoesDaVenda();
-        salvaVendaAoArquivo(venda);
-    }
+    if (opcao == ADICIONAR_ITEM) 
+        adicionaItemNovo();
+}
+
+
+void adicionaItemNovo() {
+    Venda venda;
+    
+    venda = recebeInformacoesDaVenda();
+
+    salvaVendaAoArquivo(venda);
 }
 
 
