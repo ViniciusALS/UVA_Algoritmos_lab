@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <string.h>
 
 
 
@@ -71,8 +72,6 @@ typedef struct {
 ///////////////// DECLARA FUNÇÕES /////////////////
 ///////////////////////////////////////////////////
 
-// void moveParaInicioDoArquivo(FILE* arquivo);
-// void moveParaFimDoArquivo(FILE* arquivo);
 void sistemaLoja();
 void exibeMenu();
 void processaMenu(OpcaoMenu opcao);
@@ -91,10 +90,16 @@ Venda recebeInformacoesDaVenda();
 void salvaVendaAoArquivo(Venda venda);
 float calculaPrecoTotal(Venda venda);
 void exibeMenuDeRelatorios();
+int contaNumeroDeClientesPorDia(Data data);
+char* converteDataEmString(Data data);
+char* extraiTextoDoArquivo(char* buffer);
+int determinaTamanhoDoArquivo(FILE* arquivo);
 void escreveEmArquivo(char* texto);
 FILE* abreArquivo();
 void limpaTela();
 int recebeOpcao();
+void movePtrParaInicioDoArquivo(FILE* arquivo);
+void movePtrParaFimDoArquivo(FILE* arquivo);
 
 
 
@@ -116,15 +121,6 @@ int main() {
 ///////////////////////////////////////////////////
 ////////////////// DEFINE FUNÇÕES /////////////////
 ///////////////////////////////////////////////////
-
-// void moveParaInicioDoArquivo(FILE* arquivo) {
-//     rewind(arquivo);
-// }
-
-
-// void moveParaFimDoArquivo(FILE* arquivo) {
-//     fseek(arquivo, 0, SEEK_END);
-// }
 
 
 void sistemaLoja() {
@@ -205,8 +201,7 @@ Data recebeDataAtual() {
 
 
 void salvaDataAoArquivo(Data data) {
-    char texto[30];
-    sprintf(texto, "\n\nDATA: %02d/%02d/%04d \n", data.dia, data.mes, data.ano);
+    char texto[TAMANHO_MAX_STRING] = converteDataEmString(data);
     escreveEmArquivo(texto);
 }
 
@@ -331,6 +326,66 @@ void exibeMenuDeRelatorios() {
 }
 
 
+int contaNumeroDeClientesPorDia(Data data) {
+    int numeroDeClientes = 0;
+
+    char stringData[TAMANHO_MAX_STRING] = converteDataEmString(data);
+    char* textoArquivo;
+    
+    extraiTextoDoArquivo(textoArquivo);
+
+    char* tempSubstringArquivo = strstr(tempSubstringArquivo, stringData);
+
+    if (tempSubstringArquivo != NULL) {
+        
+        while(tempSubstringArquivo = strstr(tempSubstringArquivo, "CLIENTE NOVO")) {
+            numeroDeClientes++;
+            tempSubstringArquivo++;
+        }
+    }
+
+    free(textoArquivo);
+    return numeroDeClientes;
+}
+
+
+char* converteDataEmString(Data data) {
+    char texto[TAMANHO_MAX_STRING];
+    sprintf(texto, "\n\nDATA: %02d/%02d/%04d \n", data.dia, data.mes, data.ano);
+    return texto;
+}
+
+
+char* extraiTextoDoArquivo(char* buffer) {
+
+    FILE* arquivo = abreArquivo();
+
+    if (arquivo != NULL) {
+        
+        int tamanhoArquivo = determinaTamanhoDoArquivo(arquivo);
+
+        buffer = malloc(tamanhoArquivo);
+
+        if (buffer) 
+            fread(buffer, 1, tamanhoArquivo, arquivo);
+
+        fclose(arquivo);
+    }
+
+    return buffer;
+}
+
+
+int determinaTamanhoDoArquivo(FILE* arquivo) {
+
+    movePtrParaFimDoArquivo(arquivo);
+    int tamanhoDoArquivo = ftell(arquivo);
+    movePtrParaInicioDoArquivo(arquivo);
+
+    return(tamanhoDoArquivo);
+}
+
+
 void escreveEmArquivo(char* texto) {
 
     FILE* arquivo = abreArquivo();
@@ -367,4 +422,14 @@ int recebeOpcao() {
     int opcao;
     scanf(" %d", &opcao);
     return opcao;
+}
+
+
+void movePtrParaInicioDoArquivo(FILE* arquivo) {
+    rewind(arquivo);
+}
+
+
+void movePtrParaFimDoArquivo(FILE* arquivo) {
+    fseek(arquivo, 0, SEEK_END);
 }
