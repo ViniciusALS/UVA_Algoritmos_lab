@@ -33,9 +33,9 @@
 
 
 typedef enum OrdemDeListagem {
-    ORDEM_CRESCENTE,
+    ORDEM_DECRESCENTE,
     ORDEM_DE_REGISTRO,
-    ORDEM_DECRESCENTE
+    ORDEM_CRESCENTE
 } OrdemDeListagem;
 
 
@@ -667,39 +667,41 @@ void quickSort(Venda listaDeVendas[], int tamanhoDaLista) {
 
 void quickSort_ajuda(Venda vendas[], int limiteInferior, int limiteSuperior) {
     if (limiteInferior < limiteSuperior) {
-        int indexDePivot = particiona(vendas, limiteInferior, limiteSuperior);
+        int indexPivot = particiona(vendas, limiteInferior, limiteSuperior);
 
-        quickSort_ajuda(vendas, limiteInferior, indexDePivot - 1);
-        quickSort_ajuda(vendas, indexDePivot + 1, limiteSuperior);
+        quickSort_ajuda(vendas, limiteInferior, indexPivot - 1);
+        quickSort_ajuda(vendas, indexPivot + 1, limiteSuperior);
     }
 }
 
 
 int particiona(Venda vendas[], int limiteInferior, int limiteSuperior) {
 
-    // Inicializa pivots
-    int p = vendas[limiteInferior].item.precoTotal;
-    int i = limiteInferior;
-    int j = limiteSuperior;
+    // Inicializa pivot
+    int valorEmPivot = vendas[limiteInferior].item.precoTotal;
+    
+    // Inicializa indexes de busca
+    int indexEsquerda = limiteInferior;
+    int indexDireita = limiteSuperior;
 
-    while (i < j) {
-        // Encontra o primeiro elemento maior que o pivot inferior
-        while (vendas[i].item.precoTotal <= p && i <= limiteSuperior - 1) {
-            i++;
+    while (indexEsquerda < indexDireita) {
+        // Encontra o primeiro elemento maior que o pivot começando pela esquerda
+        while (vendas[indexEsquerda].item.precoTotal <= valorEmPivot && indexEsquerda <= limiteSuperior - 1) {
+            indexEsquerda++;
         }
 
-        // Encontra o maior elemento menor que o pivot superior
-        while (vendas[j].item.precoTotal > p && j >= limiteInferior + 1) {
-            j--;
+        // Encontra o primeiro elemento menor que o pivot começando pela direita
+        while (vendas[indexDireita].item.precoTotal > valorEmPivot && indexDireita >= limiteInferior + 1) {
+            indexDireita--;
         }
 
-        if (i < j) {
-            trocaVendas(&vendas[i], &vendas[j]);
+        if (indexEsquerda < indexDireita) {
+            trocaVendas(&vendas[indexEsquerda], &vendas[indexDireita]);
         }
     }
 
-    trocaVendas(&vendas[limiteInferior], &vendas[j]);
-    return j;
+    trocaVendas(&vendas[limiteInferior], &vendas[indexDireita]);
+    return indexDireita;
 }
 
 
