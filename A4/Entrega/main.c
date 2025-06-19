@@ -89,7 +89,7 @@ void imprimeLista(Venda listaDeVendas[], int quantidadeDeVendas, OrdemDeListagem
 float calculaFaturamentoTotal(Venda* listaDeVendas, int quantidadeDeVendas); 
 int contaNumeroClientes(Venda* listaDeVendas, int quantidadeDeVendas); 
 void quickSort(Venda listaDeVendas[], int tamanhoDaLista); 
-void quickSort_ajuda(Venda vendas[], int limiteInferior, int limiteSuperior);
+void quickSortAxiliar(Venda vendas[], int limiteInferior, int limiteSuperior);
 int particiona(Venda vendas[], int limiteInferior, int limiteSuperior); 
 void trocaVendas(Venda* a, Venda* b);
 void inverteLista(Venda lista[], int tamanhoDaLista); 
@@ -661,16 +661,16 @@ int contaNumeroClientes(Venda* listaDeVendas, int quantidadeDeVendas) {
 
 
 void quickSort(Venda listaDeVendas[], int tamanhoDaLista) {
-    quickSort_ajuda(listaDeVendas, 0, tamanhoDaLista - 1);
+    quickSortAxiliar(listaDeVendas, 0, tamanhoDaLista - 1);
 }
 
 
-void quickSort_ajuda(Venda vendas[], int limiteInferior, int limiteSuperior) {
+void quickSortAxiliar(Venda vendas[], int limiteInferior, int limiteSuperior) {
     if (limiteInferior < limiteSuperior) {
         int indexPivot = particiona(vendas, limiteInferior, limiteSuperior);
 
-        quickSort_ajuda(vendas, limiteInferior, indexPivot - 1);
-        quickSort_ajuda(vendas, indexPivot + 1, limiteSuperior);
+        quickSortAxiliar(vendas, limiteInferior, indexPivot - 1);
+        quickSortAxiliar(vendas, indexPivot + 1, limiteSuperior);
     }
 }
 
