@@ -1,6 +1,6 @@
 /**************************************************
- 
-    Projeto da A4 da disciplina de algoritmos 
+
+    Projeto da A4 da disciplina de algoritmos
     do professor Lazaro de Oliveira
 
     Grupo:  Igor Sousa Alves    - 1240207519
@@ -67,40 +67,40 @@ typedef struct Venda {
 
 ///////////////// DECLARA FUNÇÕES /////////////////
 
-void registraNovoDiaDeVenda();  
-void registrarCliente(Data dataDeVenda);                                              
-void registraItem(Data dataDeVenda, char nomeCliente[]); 
-Item recebeInformacoesDoItem(); 
-Venda criaVenda(Data data, char* nomeCliente, Item item); 
-void salvaVendaEmArquivo(Venda venda); 
-void exibeRelatorios();                                      
-void listaTodasAsVendas(OrdemDeListagem ordem); 
-int calculaNumeroDeVendasTotais(); 
-void retornaTodasAsVendas(int numeroDeVendas, Venda* listaDeVendas); 
-void listaVendasPorData(Data dataDeConsulta, OrdemDeListagem ordem); 
-int calculaNumeroDeVendasPorData(Data dataDeConsulta); 
-void retornaVendasPorData(int numeroDeVendas, Venda* listaDeVendas, Data dataDeConsulta); 
-int comparaDatas(Data a, Data b); 
-void listaVendasPorCliente(char nomeCliente[], OrdemDeListagem ordem); 
-int calculaNumeroDeVendasPorCliente(char nomeCliente[]); 
-void retornaVendasPorCliente(int numeroDeVendas, Venda* listaDeVendas, char nomeCliente[]); 
-Venda* criaListaDeVendas(int tamanhoDaLista); 
-void imprimeLista(Venda listaDeVendas[], int quantidadeDeVendas, OrdemDeListagem ordem); 
-float calculaFaturamentoTotal(Venda* listaDeVendas, int quantidadeDeVendas); 
-int contaNumeroClientes(Venda* listaDeVendas, int quantidadeDeVendas); 
-void quickSort(Venda listaDeVendas[], int tamanhoDaLista); 
+void registraNovoDiaDeVenda();
+void registrarCliente(Data dataDeVenda);
+void registraItem(Data dataDeVenda, char nomeCliente[]);
+Item recebeInformacoesDoItem();
+Venda criaVenda(Data data, char* nomeCliente, Item item);
+void salvaVendaEmArquivo(Venda venda);
+void exibeRelatorios();
+void listaTodasAsVendas(OrdemDeListagem ordem);
+int calculaNumeroDeVendasTotais();
+void retornaTodasAsVendas(int numeroDeVendas, Venda* listaDeVendas);
+void listaVendasPorData(Data dataDeConsulta, OrdemDeListagem ordem);
+int calculaNumeroDeVendasPorData(Data dataDeConsulta);
+void retornaVendasPorData(int numeroDeVendas, Venda* listaDeVendas, Data dataDeConsulta);
+int comparaDatas(Data a, Data b);
+void listaVendasPorCliente(char nomeCliente[], OrdemDeListagem ordem);
+int calculaNumeroDeVendasPorCliente(char nomeCliente[]);
+void retornaVendasPorCliente(int numeroDeVendas, Venda* listaDeVendas, char nomeCliente[]);
+Venda* criaListaDeVendas(int tamanhoDaLista);
+void imprimeLista(Venda listaDeVendas[], int quantidadeDeVendas, OrdemDeListagem ordem);
+float calculaFaturamentoTotal(Venda* listaDeVendas, int quantidadeDeVendas);
+int contaNumeroClientes(Venda* listaDeVendas, int quantidadeDeVendas);
+void quickSort(Venda listaDeVendas[], int tamanhoDaLista);
 void quickSortAxiliar(Venda vendas[], int limiteInferior, int limiteSuperior);
-int particiona(Venda vendas[], int limiteInferior, int limiteSuperior); 
+int particiona(Venda vendas[], int limiteInferior, int limiteSuperior);
 void trocaVendas(Venda* a, Venda* b);
-void inverteLista(Venda lista[], int tamanhoDaLista); 
-Venda determinaVendaDoItemMaisVendido(Venda* listaDeVendas, int quantidadeDeVendas); 
+void inverteLista(Venda lista[], int tamanhoDaLista);
+Venda determinaVendaDoItemMaisVendido(Venda* listaDeVendas, int quantidadeDeVendas);
 Venda determinaVendaDoItemMenosVendido(Venda* listaDeVendas, int quantidadeDeVendas);
-Data recebeData();              
+Data recebeData();
 OrdemDeListagem recebeOrdemDeListagem();
-void editaVenda();           
-float calculaPrecoTotalDeProduto(int quantidadeDeProdutos, float precoUnitarioDoProduto); 
-void deletaVenda();             
-void esperaPorInputDoUsuario(); 
+void editaVenda();
+float calculaPrecoTotalDeProduto(int quantidadeDeProdutos, float precoUnitarioDoProduto);
+void deletaVenda();
+void esperaPorInputDoUsuario();
 
 
 
@@ -111,7 +111,7 @@ int main() {
     setlocale(LC_ALL, "Portuguese");
 
     int opcao;
-    do {    
+    do {
         limpaTela();
         printf("Loja de Roupas Veiga de Almeida\n\n");
 
@@ -136,7 +136,7 @@ int main() {
             case 1:
                 registraNovoDiaDeVenda();
                 break;
-            
+
             case 2:
                 exibeRelatorios();
                 break;
@@ -150,7 +150,7 @@ int main() {
                 break;
         }
     } while(opcao != 0);
-    
+
     return 0;
 }
 
@@ -161,19 +161,19 @@ int main() {
 void registraNovoDiaDeVenda() {
     limpaTela();
     printf("Iniciando novo dia de vendas. \n\n");
-    
+
     Data dataDeVenda = recebeData();
 
     int opcao;
     do {
         limpaTela();
-        printf("Registro de vendas do dia: %02d/%02d/%04d \n\n\n", 
+        printf("Registro de vendas do dia: %02d/%02d/%04d \n\n\n",
             dataDeVenda.dia, dataDeVenda.mes, dataDeVenda.ano);
 
         printf("Selecione uma opção: \n\n");
         printf("1 - Registrar novo cliente \n");
         printf("0 - Voltar ao menu principal \n\n");
-        
+
         printf("Opção desejada: ");
         scanf(" %d", &opcao);
 
@@ -192,7 +192,7 @@ void registraNovoDiaDeVenda() {
 void registrarCliente(Data dataDeVenda) {
     limpaTela();
     printf("Entre com o nome do cliente: ");
-    
+
     char nomeCliente[TAMANHO_MAX_STRING];
     scanf(" %[^\n]", nomeCliente);
 
@@ -213,7 +213,7 @@ void registrarCliente(Data dataDeVenda) {
             case 1:
                 registraItem(dataDeVenda, nomeCliente);
                 break;
-        } 
+        }
     } while(opcao != 0);
 }
 
@@ -221,7 +221,7 @@ void registrarCliente(Data dataDeVenda) {
 void registraItem(Data dataDeVenda, char nomeCliente[]) {
     limpaTela();
     printf("Registro de item \n\n");
-    
+
     Item novoItem = recebeInformacoesDoItem();
 
     novoItem.precoTotal = calculaPrecoTotalDeProduto(
@@ -234,7 +234,7 @@ void registraItem(Data dataDeVenda, char nomeCliente[]) {
 
     // Exibe relatório da quantidade de items vendidos no dia ao fim de cada transação
     printf("Quantidade de items vendidos no dia: %d \n\n\n", calculaNumeroDeVendasPorData(dataDeVenda));
-    
+
     esperaPorInputDoUsuario();
 }
 
@@ -318,16 +318,16 @@ void exibeRelatorios() {
             case 2:
                 limpaTela();
                 Data dataDeConsulta = recebeData();
-                
+
                 ordem = recebeOrdemDeListagem();
                 listaVendasPorData(dataDeConsulta, ordem);
                 break;
 
-            case 3: 
+            case 3:
                 limpaTela();
                 char nomeCliente[TAMANHO_MAX_STRING];
                 scanf(" %[^\n]", nomeCliente);
-                
+
                 ordem = recebeOrdemDeListagem();
                 listaVendasPorCliente(nomeCliente, ordem);
                 break;
@@ -341,7 +341,7 @@ void listaTodasAsVendas(OrdemDeListagem ordem) {
     int numeroDeVendas = calculaNumeroDeVendasTotais();
     Venda* listaDeVendas = criaListaDeVendas(numeroDeVendas);
     retornaTodasAsVendas(numeroDeVendas, listaDeVendas);
-    
+
     imprimeLista(listaDeVendas, numeroDeVendas, ordem);
 
     // Libera memória de lista com todas as vendas
@@ -360,7 +360,7 @@ int calculaNumeroDeVendasTotais() {
         exit(1);
     }
 
-    // Percorre arquivo contando número de vendas 
+    // Percorre arquivo contando número de vendas
     Venda vendaBuffer;
     while(fread(&vendaBuffer, sizeof(Venda), 1, arquivo) == 1) {
         numeroDeVendasTotais++;
@@ -381,7 +381,7 @@ void retornaTodasAsVendas(int numeroDeVendas, Venda* listaDeVendas) {
         exit(1);
     }
 
-    // Percorre arquivo adicionando vendas em lista 
+    // Percorre arquivo adicionando vendas em lista
     // e salvando seu id como a possição dentro do arquivo
 
     int id = 0;
@@ -402,7 +402,7 @@ void listaVendasPorData(Data dataDeConsulta, OrdemDeListagem ordem) {
     int numeroDeVendas = calculaNumeroDeVendasPorData(dataDeConsulta);
     Venda* listaDeVendas = criaListaDeVendas(numeroDeVendas);
     retornaVendasPorData(numeroDeVendas, listaDeVendas, dataDeConsulta);
-    
+
     imprimeLista(listaDeVendas, numeroDeVendas, ordem);
 
     free(listaDeVendas);
@@ -441,7 +441,7 @@ void retornaVendasPorData(int numeroDeVendas, Venda* listaDeVendas, Data dataDeC
         exit(1);
     }
 
-    // Percorre arquivo adicionando vendas de data específica em lista 
+    // Percorre arquivo adicionando vendas de data específica em lista
     // e salvando seu id como a possição dentro do arquivo
 
     int id = 0;
@@ -488,7 +488,7 @@ int calculaNumeroDeVendasPorCliente(char nomeCliente[]) {
         exit(1);
     }
 
-    // Percorre arquivo adicionando vendas de cliente específico em lista 
+    // Percorre arquivo adicionando vendas de cliente específico em lista
     // e salvando seu id como a possição dentro do arquivo
 
     Venda vendaBuffer;
@@ -512,7 +512,7 @@ void retornaVendasPorCliente(int numeroDeVendas, Venda* listaDeVendas, char nome
         exit(1);
     }
 
-    // Percorre arquivo adicionando vendas de cliente específico em lista 
+    // Percorre arquivo adicionando vendas de cliente específico em lista
     // e salvando seu id como a possição dentro do arquivo
 
     int id = 0;
@@ -557,7 +557,7 @@ void imprimeLista(Venda* listaDeVendas, int quantidadeDeVendas, OrdemDeListagem 
     limpaTela();
     printf("Relatórios \n");
     printf("======================================== \n\n\n");
-    
+
     printf("Quantidade de items: %d \n\n", quantidadeDeVendas);
     printf("---------------------------------------- \n\n\n");
 
@@ -565,9 +565,9 @@ void imprimeLista(Venda* listaDeVendas, int quantidadeDeVendas, OrdemDeListagem 
 
     for (int i = 0; i < quantidadeDeVendas; i++) {
         printf("ID da venda: %d \n", listaDeVendas[i].id);
-        printf("Data da venda: %02d/%02d/%04d \n", 
-                listaDeVendas[i].data.dia, 
-                listaDeVendas[i].data.mes, 
+        printf("Data da venda: %02d/%02d/%04d \n",
+                listaDeVendas[i].data.dia,
+                listaDeVendas[i].data.mes,
                 listaDeVendas[i].data.ano);
         printf("Nome do cliente: %s \n", listaDeVendas[i].nomeCliente);
         printf("Código do item: %s \n", listaDeVendas[i].item.codigo);
@@ -592,9 +592,9 @@ void imprimeLista(Venda* listaDeVendas, int quantidadeDeVendas, OrdemDeListagem 
             listaDeVendas, quantidadeDeVendas);
 
     printf("ID da venda: %d \n", vendaDoItemMaisVendido.id);
-    printf("Data da venda: %02d/%02d/%04d \n", 
-            vendaDoItemMaisVendido.data.dia, 
-            vendaDoItemMaisVendido.data.mes, 
+    printf("Data da venda: %02d/%02d/%04d \n",
+            vendaDoItemMaisVendido.data.dia,
+            vendaDoItemMaisVendido.data.mes,
             vendaDoItemMaisVendido.data.ano);
     printf("Nome do cliente: %s \n", vendaDoItemMaisVendido.nomeCliente);
     printf("Código do item: %s \n", vendaDoItemMaisVendido.item.codigo);
@@ -611,9 +611,9 @@ void imprimeLista(Venda* listaDeVendas, int quantidadeDeVendas, OrdemDeListagem 
             listaDeVendas, quantidadeDeVendas);
 
     printf("ID da venda: %d \n", vendaDoItemMenosVendido.id);
-    printf("Data da venda: %02d/%02d/%04d \n", 
-            vendaDoItemMenosVendido.data.dia, 
-            vendaDoItemMenosVendido.data.mes, 
+    printf("Data da venda: %02d/%02d/%04d \n",
+            vendaDoItemMenosVendido.data.dia,
+            vendaDoItemMenosVendido.data.mes,
             vendaDoItemMenosVendido.data.ano);
     printf("Nome do cliente: %s \n", vendaDoItemMenosVendido.nomeCliente);
     printf("Código do item: %s \n", vendaDoItemMenosVendido.item.codigo);
@@ -644,7 +644,7 @@ int contaNumeroClientes(Venda* listaDeVendas, int quantidadeDeVendas) {
     // Termina execução caso lista esteja vazia
     if (quantidadeDeVendas <= 0)
         return 0;
-    
+
     int quantidadeCliente = 1;
     char nomeClienteTemp[TAMANHO_MAX_STRING];
     strcpy(nomeClienteTemp, listaDeVendas[0].nomeCliente);
@@ -678,8 +678,8 @@ void quickSortAxiliar(Venda vendas[], int limiteInferior, int limiteSuperior) {
 int particiona(Venda vendas[], int limiteInferior, int limiteSuperior) {
 
     // Inicializa pivot
-    int valorEmPivot = vendas[limiteInferior].item.precoTotal;
-    
+    float valorEmPivot = vendas[limiteInferior].item.precoTotal;
+
     // Inicializa indexes de busca
     int indexEsquerda = limiteInferior;
     int indexDireita = limiteSuperior;
@@ -734,7 +734,7 @@ Venda determinaVendaDoItemMaisVendido(Venda* listaDeVendas, int quantidadeDeVend
         printf("Erro: lista vazia \n");
         exit(1);
     }
-    
+
     // Percorre lista buscando pelo maior elemento
     Venda vendaDoItemMaisVendidoAtual = listaDeVendas[0];
 
@@ -742,7 +742,7 @@ Venda determinaVendaDoItemMaisVendido(Venda* listaDeVendas, int quantidadeDeVend
         if (listaDeVendas[i].item.quantidade > vendaDoItemMaisVendidoAtual.item.quantidade) {
             vendaDoItemMaisVendidoAtual = listaDeVendas[i];
         }
-    }   
+    }
 
     return vendaDoItemMaisVendidoAtual;
 }
@@ -753,7 +753,7 @@ Venda determinaVendaDoItemMenosVendido(Venda* listaDeVendas, int quantidadeDeVen
         printf("Erro: lista vazia \n");
         exit(1);
     }
-    
+
     // Percorre lista buscando pelo menor elemento
     Venda vendaDoItemMenosVendidoAtual = listaDeVendas[0];
 
@@ -761,7 +761,7 @@ Venda determinaVendaDoItemMenosVendido(Venda* listaDeVendas, int quantidadeDeVen
         if (listaDeVendas[i].item.quantidade < vendaDoItemMenosVendidoAtual.item.quantidade) {
             vendaDoItemMenosVendidoAtual = listaDeVendas[i];
         }
-    }   
+    }
 
     return vendaDoItemMenosVendidoAtual;
 }
@@ -771,14 +771,14 @@ Data recebeData() {
     printf("Insira a data (dd/mm/aaaa): ");
     Data data;
     scanf(" %d/%d/%d", &data.dia, &data.mes, &data.ano);
-    
+
     return data;
 }
 
 
 OrdemDeListagem recebeOrdemDeListagem() {
     int opcao;
-    
+
     limpaTela();
     printf("Escolha a ordem em que você deseja ver os items lidados: \n\n");
 
@@ -825,9 +825,9 @@ void editaVenda() {
     }
 
 
-    printf("\n\nData da venda: %02d/%02d/%04d \n", 
-            vendaParaEditar.data.dia, 
-            vendaParaEditar.data.mes, 
+    printf("\n\nData da venda: %02d/%02d/%04d \n",
+            vendaParaEditar.data.dia,
+            vendaParaEditar.data.mes,
             vendaParaEditar.data.ano);
     printf("Nome do cliente: %s \n", vendaParaEditar.nomeCliente);
     printf("Código do item: %s \n", vendaParaEditar.item.codigo);
@@ -837,11 +837,11 @@ void editaVenda() {
     printf("Preço unitário do item: %.2f \n", vendaParaEditar.item.precoUnitario);
     printf("Preço total final dos items: %.2f \n\n\n", vendaParaEditar.item.precoTotal);
 
-    
+
     printf("Nova data da venda (dd/mm/aaaa): ");
-    scanf(" %d/%d/%d", 
-            &vendaParaEditar.data.dia, 
-            &vendaParaEditar.data.mes, 
+    scanf(" %d/%d/%d",
+            &vendaParaEditar.data.dia,
+            &vendaParaEditar.data.mes,
             &vendaParaEditar.data.ano);
 
     printf("Novo nome do cliente: ");
@@ -849,7 +849,7 @@ void editaVenda() {
 
     printf("Novo código do item: ");
     scanf(" %[^\n]", vendaParaEditar.item.codigo);
-    
+
     printf("Novo nome do item: ");
     scanf(" %[^\n]", vendaParaEditar.item.nome);
 
@@ -861,7 +861,7 @@ void editaVenda() {
 
     printf("Novo preço unitário do item: ");
     scanf(" %f", &vendaParaEditar.item.precoUnitario);
-    
+
     vendaParaEditar.item.precoTotal = calculaPrecoTotalDeProduto(
                 vendaParaEditar.item.quantidade, vendaParaEditar.item.precoUnitario);
     printf("Novo preço total final dos items: %.2f \n\n\n", vendaParaEditar.item.precoTotal);
@@ -877,8 +877,8 @@ void editaVenda() {
         exit(1);
     }
 
-    fclose(arquivo); 
-}  
+    fclose(arquivo);
+}
 
 
 float calculaPrecoTotalDeProduto(int quantidadeDeProdutos, float precoUnitarioDoProduto) {
@@ -907,38 +907,38 @@ void deletaVenda() {
         exit(1);
     }
 
-    // Percorre conteúdo do arquivo, 
+    // Percorre conteúdo do arquivo,
     // reescrevendo suas vendas em arquivoTem com exeção da venda desejada
 
     int idAtual = 0;
     Venda vendaBuffer;
     while(fread(&vendaBuffer, sizeof(Venda), 1, arquivo) == 1) {
-        if (idAtual != id) 
+        if (idAtual != id)
             fwrite(&vendaBuffer, sizeof(Venda), 1, arquivoTemp);
-        
+
         idAtual++;
     }
 
-    // Apaga arquivo origianl e testa se teve sucesso na ação 
+    // Apaga arquivo origianl e testa se teve sucesso na ação
     if (remove(NOME_ARQUIVO) != 0) {
         printf("Erro: Falha ao deletar arquivo. \n");
         exit(1);
     }
-    
-    // renomeia arquivo temporário com o nome do arquivo original 
-    // e testa se teve sucesso na ação 
+
+    // renomeia arquivo temporário com o nome do arquivo original
+    // e testa se teve sucesso na ação
     if (rename("temp.bin", NOME_ARQUIVO) != 0) {
         printf("Erro: Falha ao renomear arquivo. \n");
         exit(1);
     }
-    
+
     printf("\nArquivo deletado com sucesso.\n\n");
 
     esperaPorInputDoUsuario();
 
     fclose(arquivoTemp);
-    fclose(arquivo); 
-}  
+    fclose(arquivo);
+}
 
 
 void esperaPorInputDoUsuario() {
